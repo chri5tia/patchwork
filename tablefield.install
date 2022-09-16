@@ -18,6 +18,51 @@ function tablefield_update_8001() {
 }
 
 /**
+ * Add columns for row_header and column_header to the database.
+ * Note: drush php-eval "echo drupal_set_installed_schema_version('tablefield', '8001');"
+ * to revert to original set schema while testing
+ */
+function tablefield_update_8002() {
+  tablefield_add_new_column('row_header', [
+    'type' => 'int',
+    'length' => 4,
+    'default' => '1',
+    'not null' => TRUE,
+  ]);
+  tablefield_add_new_column('column_header', [
+    'type' => 'int',
+    'length' => 4,
+    'default' => '0',
+    'not null' => TRUE,
+  ]);
+  return (string) new TranslatableMarkup("New columns added.");
+}
+
+/**
+ * Update existing paragraph tables for a row header
+ * (UPDATE `tablefield` SET `row_header` = 1)
+ */
+function tablefield_update_8003() {
+  $schema = Database::getConnection()->query(  [
+    //TODO: translate the above mysql query here
+  ] );
+}
+
+/**
+ *  Updates tablefield entity manager storage definition
+ *  VA.gov only, do not include in contrib patch
+ */
+function tablefield_update_8004() {
+  // Get entity storage definition for paragraph entity
+  $storage_definition = Drupal::service('entity_field.manager')->getFieldStorageDefinitions('paragraph');
+  if (isset($storage_definition['field_table'])) {
+    // Compare the previous storage definition with what is expected and update it
+    $original_storage_definition = Drupal::service('entity.last_installed_schema.repository')->getLastInstalledFieldStorageDefinitions('paragraph');
+    Drupal::service('field_storage_definition.listener')->onFieldStorageDefinitionUpdate($storage_definition['field_table'], $original_storage_definition['field_table']);
+  }
+}
+
+/**
  * Helper function to add new columns to the field schema.
  *
  * @param string $column_name
