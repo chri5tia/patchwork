@@ -18,6 +18,24 @@ function tablefield_update_8001() {
 }
 
 /**
+ * Add columns for setting row and column header per field value to the database.
+ */
+function tablefield_update_8002() {
+  tablefield_add_new_column('row_header', [
+    'type' => 'int',
+    'size' => 'tiny',
+    'default' => 0,
+    'not null' => TRUE,
+  ]);
+  tablefield_add_new_column('column_header', [
+    'type' => 'int',
+    'size' => 'tiny',
+    'default' => 0,
+    'not null' => TRUE,
+  ]);
+}
+
+/**
  * Helper function to add new columns to the field schema.
  *
  * @param string $column_name

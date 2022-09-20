@@ -139,6 +139,12 @@ class TablefieldWidget extends WidgetBase implements ContainerFactoryPluginInter
     $cols = isset($default_value->rebuild['cols']) ?
       $default_value->rebuild['cols'] : $this->configFactory->get('tablefield.settings')->get('cols');
 
+    $row_header = isset($default_value->row_header) ?
+      $default_value->row_header : 0;
+
+    $column_header = isset($default_value->column_header) ?
+      $default_value->column_header : 0;
+
     $element['caption'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Table Caption'),
@@ -161,6 +167,8 @@ class TablefieldWidget extends WidgetBase implements ContainerFactoryPluginInter
       '#import' => $this->currentUser->hasPermission('import tablefield'),
     // Add permission.
       '#addrow' => $this->currentUser->hasPermission('addrow tablefield'),
+      '#row_header' => $row_header,
+      '#column_header' => $column_header,
     ] + $element;
 
     if ($is_field_settings_default_widget_form) {

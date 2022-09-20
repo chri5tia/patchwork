@@ -34,6 +34,8 @@ class Tablefield extends FormElement {
       '#theme_wrappers' => ['form_element'],
       '#addrow' => FALSE,
       '#add_row' => 0,
+      '#row_header' => 0,
+      '#column_header' => 0,
     ];
   }
 
@@ -43,6 +45,8 @@ class Tablefield extends FormElement {
   public static function processTablefield(&$element, FormStateInterface $form_state, &$complete_form) {
     $parents = $element['#parents'];
     $value = is_array($element['#value']) ? $element['#value'] : [];
+    $row_header = $element['#row_header'];
+    $column_header = $element['#column_header'];
 
     // Check if the input_type is one of the allowed types.
     $input_type = in_array($element['#input_type'], ['textarea', 'textfield']) ? $element['#input_type'] : 'textfield';
@@ -220,6 +224,18 @@ class Tablefield extends FormElement {
         ],
       ];
     }
+
+    $element['tablefield']['row_header'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Display first row as a table header'),
+      '#default_value' => $row_header,
+    ];
+
+    $element['tablefield']['column_header'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Display first column as a table header'),
+      '#default_value' => $column_header,
+    ];
 
     return $element;
   }
