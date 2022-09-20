@@ -1,0 +1,30 @@
+diff --git a/docroot/modules/custom/va_gov_backend/va_gov_backend.module b/docroot/modules/custom/va_gov_backend/va_gov_backend.module
+index 4b304ea3..6594eee2 100644
+--- a/docroot/modules/custom/va_gov_backend/va_gov_backend.module
++++ b/docroot/modules/custom/va_gov_backend/va_gov_backend.module
+@@ -1861,7 +1861,7 @@ function va_gov_backend_entity_presave(EntityInterface $entity) {
+       _va_gov_backend_disable_autopath_alias($entity);
+     }
+ 
+-    _va_gov_backend_apply_filter_to_tablefield_cells($entity);
++   /* _va_gov_backend_apply_filter_to_tablefield_cells($entity); */
+   }
+ }
+ 
+@@ -1886,6 +1886,8 @@ function _va_gov_backend_set_file_type(FieldableEntityInterface $entity) {
+  * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
+  *   The table paragraph.
+  */
++
++ /* Removing this function for testing
+ function _va_gov_backend_apply_filter_to_tablefield_cells(FieldableEntityInterface $entity) {
+   // We need to make sure this entity is fieldable before we start digging.
+   $entity_type = $entity->getEntityTypeId();
+@@ -1920,6 +1922,7 @@ function _va_gov_backend_apply_filter_to_tablefield_cells(FieldableEntityInterfa
+     }
+   }
+ }
++*/
+ 
+ /**
+  * Determine if pathauto alias should be enabled on node.
