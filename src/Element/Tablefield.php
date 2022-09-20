@@ -225,18 +225,6 @@ class Tablefield extends FormElement {
       ];
     }
 
-    $element['tablefield']['row_header'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Display first row as a table header'),
-      '#default_value' => $row_header,
-    ];
-
-    $element['tablefield']['column_header'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Display first column as a table header'),
-      '#default_value' => $column_header,
-    ];
-
     return $element;
   }
 

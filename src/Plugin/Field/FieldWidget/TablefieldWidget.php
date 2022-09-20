@@ -153,6 +153,18 @@ class TablefieldWidget extends WidgetBase implements ContainerFactoryPluginInter
       '#description' => $this->t('This brief caption will be associated with the table and will help screen reader better describe the content within.'),
     ];
 
+    $element['row_header'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Display first row as a table header'),
+      '#default_value' => $row_header,
+    ];
+
+    $element['column_header'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Display first column as a table header'),
+      '#default_value' => $column_header,
+    ];
+
     $element = [
       '#type' => 'tablefield',
       '#input_type' => $this->getSetting('input_type'),
