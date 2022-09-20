@@ -44,6 +44,16 @@ class TablefieldItem extends FieldItemBase {
           'length' => 255,
           'default value' => '',
         ],
+        'row_header' => [
+          'type' => 'int',
+          'size' => 'tiny',
+          'default value' => 0,
+        ],
+        'column_header' => [
+          'type' => 'int',
+          'size' => 'tiny',
+          'default value' => 0,
+        ],
       ],
     ];
   }
@@ -146,6 +156,12 @@ class TablefieldItem extends FieldItemBase {
     $properties['caption'] = DataDefinition::create('string')
       ->setLabel(t('Table Caption'));
 
+    $properties['row_header'] = DataDefinition::create('boolean')
+      ->setLabel(t('Display first row as a table header'));
+
+    $properties['column_header'] = DataDefinition::create('boolean')
+      ->setLabel(t('Display first column as a table header'));
+
     return $properties;
   }
 
@@ -160,6 +176,8 @@ class TablefieldItem extends FieldItemBase {
     elseif (!empty($values['tablefield'])) {
       $values['rebuild'] = $values['tablefield']['rebuild'];
       $values['value'] = $values['tablefield']['table'];
+      $values['row_header'] = $values['tablefield']['row_header'];
+      $values['column_header'] = $values['tablefield']['column_header'];
       unset($values['tablefield']);
       unset($values['rebuild']['rebuild']);
     }

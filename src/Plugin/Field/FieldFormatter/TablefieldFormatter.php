@@ -136,13 +136,16 @@ class TablefieldFormatter extends FormatterBase implements ContainerFactoryPlugi
     $entity_type = $entity->getEntityTypeId();
     $entity_id = $entity->id();
 
-    $row_header = $this->getSetting('row_header');
-    $column_header = $this->getSetting('column_header');
+    $row_header_setting = $this->getSetting('row_header');
+    $column_header_setting = $this->getSetting('column_header');
 
     $elements = [];
-    $header = [];
 
     foreach ($items as $delta => $table) {
+      $header = [];
+
+      $row_header = $row_header_setting || $table->row_header;
+      $column_header = $column_header_setting || $table->column_header;
 
       if (!empty($table->value)) {
         // Tablefield::rationalizeTable($table->value);.
