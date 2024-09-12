@@ -1,0 +1,39 @@
+diff --git a/src/Plugin/views/field/WebformSubmissionField.php b/src/Plugin/views/field/WebformSubmissionField.php
+index 400e300..6fdab2f 100644
+--- a/src/Plugin/views/field/WebformSubmissionField.php
++++ b/src/Plugin/views/field/WebformSubmissionField.php
+@@ -117,22 +117,22 @@ class WebformSubmissionField extends FieldPluginBase {
+    * {@inheritdoc}
+    */
+   public function query() {
+-    parent::query();
++    // parent::query();
+ 
+     // Webform submission might have multiple values stored for the webform
+     // element we are operating on. Let's make sure we are not introducing
+     // duplicate rows in the resultset by enforcing just the first delta.
+-    if (!empty($this->query->getTableInfo($this->tableAlias)['join']->extra)) {
+-      $this->query->getTableInfo($this->tableAlias)['join']->extra[] = [
+-        'field' => 'delta',
+-        'value' => 0,
+-      ];
+-
+-      $this->query->getTableInfo($this->tableAlias)['join']->extra[] = [
+-        'field' => 'property',
+-        'value' => '',
+-      ];
+-    }
++    // if (!empty($this->query->getTableInfo($this->tableAlias)['join']->extra)) {
++    //  $this->query->getTableInfo($this->tableAlias)['join']->extra[] = [
++    //    'field' => 'delta',
++    //    'value' => 0,
++    //  ];
++
++    //  $this->query->getTableInfo($this->tableAlias)['join']->extra[] = [
++    //    'field' => 'property',
++    //    'value' => '',
++    //  ];
++    //}
+   }
+ 
+   /**
